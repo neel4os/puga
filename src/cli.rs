@@ -11,6 +11,27 @@ pub struct Cli {
 pub enum Commands {
     /// generate uuid
     Uuid(UUIDArgs),
+    /// url encode and decode
+    Url {
+        #[command(subcommand)]
+        command: UrlCommands,
+    },
+}
+
+#[derive(Subcommand)]
+pub enum UrlCommands {
+    ///encode url
+    Encode {
+        #[arg(short, long)]
+        /// url to be encoded
+        url: String
+    },
+    ///decode url
+    Decode {
+        #[arg(short, long)]
+        /// url to be decoded
+        url: String
+    },
 }
 
 #[derive(Args)]
