@@ -16,6 +16,27 @@ pub enum Commands {
         #[command(subcommand)]
         command: UrlCommands,
     },
+    /// base64 encode and decode
+    B64 {
+        #[command(subcommand)]
+        command: B64Commands,
+    },
+}
+
+#[derive(Subcommand)]
+pub enum B64Commands {
+    ///encode base64 string
+    Encode {
+        #[arg(short, long)]
+        /// string to be base 64 encoded
+        text: String,
+    },
+    ///decode url
+    Decode {
+        #[arg(short, long)]
+        /// string to be base64 decoded
+        text: String,
+    },
 }
 
 #[derive(Subcommand)]
@@ -24,13 +45,13 @@ pub enum UrlCommands {
     Encode {
         #[arg(short, long)]
         /// url to be encoded
-        url: String
+        url: String,
     },
     ///decode url
     Decode {
         #[arg(short, long)]
         /// url to be decoded
-        url: String
+        url: String,
     },
 }
 
