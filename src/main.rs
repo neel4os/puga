@@ -1,6 +1,7 @@
 mod cli;
 mod uuidcmd;
-use crate::{cli::UrlCommands, uuidcmd::uuid_generate::generate_uuid};
+mod b64ed;
+use crate::{cli::{B64Commands, UrlCommands}, uuidcmd::uuid_generate::generate_uuid};
 use clap::Parser;
 use cli::Cli;
 use urlencoding::{decode, encode};
@@ -21,5 +22,13 @@ fn main() {
                 println!("{}", encode(url).into_owned())
             }
         },
+        cli::Commands::B64 { command } => match command{
+            B64Commands::Encode { text } => {
+               println!("{}",b64ed::b64_ops::encode(text))
+            }
+            B64Commands::Decode { text } => {
+                println!("{}",b64ed::b64_ops::decode(text))
+            }
+        }
     }
 }
